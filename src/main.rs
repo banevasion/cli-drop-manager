@@ -160,14 +160,14 @@ async fn process_create_args(mut args: Vec<&str>, client: &reqwest::Client) {
     match args[3] {
         "initial-lifetime" | "paid-lifetime" | "initial-renewal" | "paid-renewal" => (),
         _ => return println!("Type argument value must be a valid drop type\n"),
-    }
+    };
 
     match args[4].parse::<i32>() {
         Ok(_) => (),
         Err(_) => return println!("Stock argument value must be an integer\n"),
-    }
+    };
     
-    create_drop(args, &client).await
+    create_drop(args, &client).await;
 }
 
 async fn list_drops(client: &reqwest::Client) {
@@ -224,7 +224,7 @@ async fn view_drop(dropname: &str, client: &reqwest::Client) {
 }
 
 async fn edit_drop(args: Vec<&str>, client: &reqwest::Client) {
-    let body= match args[1] {
+    let body = match args[1] {
         "name" | "param" | "secret" | "type" => DropEdit {
             name: String::from(args[0]),
             argument: String::from(args[1]),
@@ -258,7 +258,7 @@ async fn edit_drop(args: Vec<&str>, client: &reqwest::Client) {
         return println!("Drop: {} has been edited\n", &args[0]);
     }
         
-    println!("There are no drops named: {}\n", &args[0])
+    println!("There are no drops named: {}\n", &args[0]);
 }
 
 async fn delete_drop(name_string: &str, client: &reqwest::Client) {
@@ -286,7 +286,7 @@ async fn delete_drop(name_string: &str, client: &reqwest::Client) {
         return println!("Drop: {} has been deleted\n", &name_string);
     }
     
-    println!("There are no drops named: {}\n", &name_string)
+    println!("There are no drops named: {}\n", &name_string);
 }
 
 async fn create_drop(args: Vec<&str>, client: &reqwest::Client) {
